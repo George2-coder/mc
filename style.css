@@ -1,0 +1,306 @@
+* { box-sizing: border-box; }
+body {
+  background-image: #630d8a;
+  color: #0e203a;
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+.calculator {
+  background: #111746;
+  padding: 1.5rem;
+  border-radius: 16px;
+  width: 340px;
+  box-shadow: 0 20px 40px rgba(160, 154, 154, 0.5);
+  position: relative;
+}
+.display {
+  background: #252e71;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 2rem;
+  text-align: right;
+  margin-bottom: 12px;
+  min-height: 60px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+.buttons { display: grid; gap: 8px; }
+.row { display: flex; gap: 8px; margin-bottom: 6px; }
+button {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background: #3a3d54;
+  color: #fff;
+  transition: transform .1s, filter .1s;
+}
+button:hover { filter: brightness(1.1); }
+button:active { transform: scale(.97); }
+button.small { font-size: .8rem; padding: 10px; }
+.meme-container {
+  position: absolute;
+  inset: 0;
+  background: rgba(30,32,48,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  gap: 12px;
+  padding: 1rem;
+}
+.hidden { display: none; }
+.loader {
+  font-size: 1.2rem;
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+.meme-img {
+  max-width: 100%;
+  max-height: 4000px;
+  border-radius: 10px;
+  background: #111;
+  object-fit: contain;
+}
+#reset-btn {
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #ff5f7e;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotate(var(--r)) scale(1.1);
+    opacity: 0;
+  }
+}
+.chaos-meme {
+  position: fixed;
+  width: 80px;
+  height: auto;
+  pointer-events: none;
+  z-index: 9999;
+  animation: fall var(--duration) linear forwards;
+  will-change: transform, opacity;
+}
+.shake {
+  animation: shake 0.4s;
+}
+@keyframes shake {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(-3px,3px); }
+  50% { transform: translate(3px,-3px); }
+  75% { transform: translate(-2px,2px); }
+  100% { transform: translate(0,0); }
+}
+:root {
+  /* Neon theme defaults */
+  --bg-gradient: linear-gradient(135deg, #0f111f 0%, #1f223d 60%);
+  --card-bg: rgba(30,33,65,0.85);
+  --btn-gradient: linear-gradient(135deg, #2f3361, #1f2150);
+  --accent-glow: #7c8cff;
+  --shadow-color: rgba(124,140,255,0.5);
+}
+body.pastel {
+  --bg-gradient: linear-gradient(135deg, #f0eef7 0%, #d9d4f0 60%);
+  --card-bg: rgba(255,255,255,0.8);
+  --btn-gradient: linear-gradient(135deg, #ffd6e0, #c3b3ff);
+  --accent-glow: #ff8fa3;
+  --shadow-color: rgba(255,143,163,0.4);
+}
+body {
+  background: var(--bg-gradient);
+  transition: background .6s ease;
+}
+
+/* Glowing animated gradient border (only when .chaos-active on calculator) */
+.calculator {
+  position: relative;
+  transition: box-shadow .4s ease;
+}
+.calculator.glow {
+  --g: 0;
+}
+.calculator.glow::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -4px;
+  border-radius: 26px;
+  padding: 2px;
+  background: conic-gradient(
+    from 90deg,
+    rgba(124,140,255,0.8),
+    rgba(255,143,163,0.8),
+    rgba(124,140,255,0.8),
+    rgba(255,143,163,0.8)
+  );
+  mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: spin-border 3s linear infinite;
+  filter: blur(6px);
+}
+/* Professional / Excel mode */
+body.professional {
+  --bg-gradient: #f3f7f9;
+  --card-bg: #ffffff;
+  --btn-gradient: linear-gradient(135deg, #e8f4e8, #d4ecd4);
+  --accent-glow: #2f8f2f;
+  --shadow-color: rgba(47,143,47,0.3);
+  color: #1f3f4f;
+  font-family: "Segoe UI", system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+}
+body.professional .calculator {
+  border: 1px solid #b1d0b1;
+}
+body.professional .display {
+  background: #f9fdf9;
+  border: 1px solid #c7e0c7;
+  color: #0f2a3a;
+  font-weight: 600;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+}
+body.professional button {
+  background: #e6f2e6;
+  border: 1px solid #b1d0b1;
+  color: #0f2a3a;
+  font-weight: 500;
+  border-radius: 4px;
+  box-shadow: none;
+}
+body.professional button:hover {
+  background: #d4e8d4;
+}
+body.professional button:active {
+  background: #c4dec4;
+}
+body.professional .meme-container {
+  background: rgba(255,255,255,0.95);
+}
+.calculator.professional {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.calculator.professional.glow::before {
+  background: conic-gradient(
+    from 90deg,
+    rgba(47,143,47,0.8),
+    rgba(47,143,47,0.8),
+    rgba(47,143,47,0.8),
+    rgba(47,143,47,0.8)
+  );
+}
+.calculator.professional.glow::before {
+  animation: spin-border 4s linear infinite;
+}
+.calculator.professional.glow {
+  --g: 0;
+}
+/* Neon theme glow effect */
+
+@keyframes spin-border {
+  to { transform: rotate(360deg); }
+}
+
+/* Display reflection */
+.display {
+  position: relative;
+}
+.display::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  transform: translateY(6px) scale(1);
+  font-size: 2.5rem;
+  color: rgba(232,236,255,0.08);
+  filter: blur(6px);
+  pointer-events: none;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Button base updated to use theme vars */
+button {
+  background: var(--btn-gradient);
+  box-shadow:
+    0 14px 30px -5px rgba(31,35,85,0.35),
+    inset 0 1px 2px rgba(255,255,255,0.05);
+  position: relative;
+  transition: transform .15s ease, box-shadow .25s ease, background .4s ease;
+}
+
+/* Ripple effect */
+button {
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+  opacity: .6;
+  animation: ripple-anim .6s ease-out;
+  background: rgba(255,255,255,0.35);
+}
+
+@keyframes glitch {
+  0% { clip-path: inset(0 0 0 0); transform: translate(0,0); }
+  20% { clip-path: inset(5px 0 5px 0); transform: translate(-2px,2px); }
+  40% { clip-path: inset(0 5px 5px 0); transform: translate(2px,-1px); }
+  60% { clip-path: inset(5px 5px 0 0); transform: translate(-1px,-2px); }
+  80% { clip-path: inset(0 0 5px 5px); transform: translate(1px,1px); }
+  100% { clip-path: inset(0 0 0 0); transform: translate(0,0); }
+}
+.display.glitch {
+  animation: glitch .4s ease-in-out;
+}
+
+@keyframes ripple-anim {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Adjust shadows for theme */
+.meme-img {
+  box-shadow: 0 30px 60px -10px var(--shadow-color);
+}
+#reset-btn {
+  box-shadow: 0 15px 35px -5px var(--shadow-color);
+}
+
+/* Small transition for theme label */
+#theme-toggle {
+  background: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+}

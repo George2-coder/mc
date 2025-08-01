@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meme Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="calculator">
+    <div class="top-bar" style="display:flex; gap:8px; justify-content:space-between; margin-bottom:4px;">
+  <div>
+    <button id="theme-toggle" class="small">Neon</button>
+    <button id="pro-toggle" class="small">Professional</button> 
+</div>
+  <div>
+    <span id="mode-label" style="font-size:0.75rem; opacity:0.8;">Meme Mode</span>
+  </div>
+</div>
+
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+      <div class="row">
+        <button data-val="7">7</button>
+        <button data-val="8">8</button>
+        <button data-val="9">9</button>
+        <button data-op="clear">C</button>
+      </div>
+      <div class="row">
+        <button data-val="4">4</button>
+        <button data-val="5">5</button>
+        <button data-val="6">6</button>
+        <button data-op="back">←</button>
+      </div>
+      <div class="row">
+        <button data-val="1">1</button>
+        <button data-val="2">2</button>
+        <button data-val="3">3</button>
+        <button data-op="+">+</button>
+      </div>
+      <div class="row">
+        <button data-val="0">0</button>
+        <button data-val=".">.</button>
+        <button data-op="=">=</button>
+        <button data-op="-">−</button>
+      </div>
+      <div class="row">
+        <button data-op="*">×</button>
+        <button data-op="/">÷</button>
+        <button data-op="%" class="small">%</button>
+        <button data-op="meme-mode" class="small">Meme Mode</button>
+      </div>
+      <div class="row">
+  <button id="chaos-btn" class="small">Chaos Mode</button>
+</div>
+    </div>
+    <div id="meme-container" class="meme-container hidden">
+      <div id="loader" class="loader">Calculating...</div>
+      <img id="meme-image" src="" alt="Meme" class="meme-img" />
+      <div><button id="reset-btn">Reset</button></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
